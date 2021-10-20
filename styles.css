@@ -9,10 +9,15 @@
 html{
 	font-size: 10px;
 	font-family: "Open Sans",sans-serif;
+	scroll-behavior: smooth;
 }
 
 a{
 	text-decoration: none;
+}
+
+#header a{
+	color: white;
 }
 
 .container{
@@ -23,6 +28,124 @@ a{
 	justify-content: center;
 
 }
+
+#header .header{
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: auto;
+	min-height: 8vh;
+	background-color: rgba(31,30,30,0.24);
+	transition: .3s ease background-color;
+
+}
+
+
+.header .navbar{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+	max-width: 1300px;
+	padding: 0 10px;
+}
+
+#header .list ul{
+	list-style: none;
+	position: absolute;
+	background-color: rgb(31, 30, 30);
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+	overflow-x: hidden ;
+	transition: 0.4s ease left;
+}
+#header .list ul.active{
+	left: 0;
+}
+
+#header .list ul a{
+	font-size: 2.5rem;
+	font-weight: 500;
+	letter-spacing: .2rem;
+	text-decoration: none;
+	padding: 20px;
+	display: block;
+	transition: .3s ease color;
+
+}
+#header .list ul a:hover{
+	color: crimson;
+}
+#header .list .hamburger {
+	height: 60px;
+	width: 60px;
+	display: inline-block;
+	border: 3px solid white;
+	border-radius: 50%;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+	cursor: pointer;
+	transform: scale(0.8);
+	margin-right:20px ;
+	margin-bottom: 10px;
+}
+#header .list .hamburger::after{
+	content: '';
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	position: absolute;
+	border: 3px solid white;
+	animation: hamburger_puls 1s ease infinite;
+}
+
+#header .list .hamburger .bar{
+	height: 2px;
+	width: 30px;
+	position: relative;
+	background-color: white;
+	z-index: -1;
+}
+#header .list .hamburger .bar::after,#header .list .hamburger .bar::before{
+	position: absolute;
+	content: '';
+	height: 100%;
+	width: 100%;
+	left: 0;
+	background-color: white;
+	transition: 0.3s ease;
+	transition-property: top, bottom;
+}
+
+#header .list .hamburger .bar::after{
+	top: 8px;
+}
+#header .list .hamburger .bar::before{
+	bottom: 8px;
+}
+#header .hamburger.active .bar::before {
+
+	bottom: 0;
+}
+
+#header .hamburger.active .bar::after{
+	top: 0;
+}
+
+
 
 #intro{
 	background-image: url(./img/bg.png);
@@ -369,8 +492,10 @@ p{
 	font-size: 3rem;
 	color: white;
 	text-transform: uppercase;
+	font-weight: 800;
 
 }
+
 .brands span{
 	color: crimson;
 }
@@ -425,6 +550,16 @@ p{
 @keyframes text_name{
 	100%{
 		color: crimson;
+	}
+}
+@keyframes hamburger_puls{
+	0%{
+		opacity: 1;
+		transform: scale(1);
+	}
+	100%{
+		opacity: 0;
+		transform: scale(1.45) ;
 	}
 }
 
@@ -506,6 +641,27 @@ p{
 
 
 @media only screen and (min-width: 1200px){
+	#header .list .hamburger {
+		display: none;
+	}
+
+	#header .list ul{
+		display: block;
+		height: auto;
+		position: initial;
+		width: fit-content;
+		background-color: transparent;
+
+	}
+	#header .list ul li{
+		display: inline-block;
+	}
+	#header .list ul li a{
+		font-size: 1.8rem;
+	}
+
+
+
 	#services .item{
 		flex-basis: 22%;
 		margin: 1.5%;
